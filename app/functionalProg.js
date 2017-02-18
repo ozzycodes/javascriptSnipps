@@ -34,14 +34,6 @@ var checkPastLimit = function(limiter, item) {
 var arr4 = mapForEach(arr1, checkPastLimit.bind(this, 1)); //1 is the value of limiter, item is passed for the array
 console.log(arr4);
 
-/*
-var checkLimitsLite = function(limiter) {
-	return function(limiter, item) {
-		return item > limiter;
-	}.bind(this, limiter);
-};
-*/
-
 var checkLimitsLite = function(limiter) {
 	return function(limiter, item) {
 		return item > limiter;
