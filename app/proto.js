@@ -17,22 +17,48 @@ Person.prototype.getFullName = function() {
 	return this.firstname + ' ' + this.lastname; //Both john and jane will 
 }                                                //have access to this method
 
-var john = new Person('John', 'Doe'); 
+var john = new Person('John', 'Doe'); //NEW ONLY WORKS IN FUNCTIONS, NOT OBJECT LITERALS
 console.log(john);                    //it runs the entire function
 
 var jane = new Person('Jane', 'Doe');
 console.log(jane);                    //it runs the entire function
 
 
+//Object.create can ONLY be used with OBJECT LITERALS
+
 /*
-Person {}
-proto.js:9 This function is invoked
-proto.js:13 Person {firstname: "John", lastname: "Doe"}
-Person {}
-proto.js:9 This function is invoked
-proto.js:16 Person {firstname: "Jane", lastname: "Doe"}
+var juan = Object.create(Person('Juan', 'Perez'));
+console.log(juan);
+*/
+
+/*
+Uncaught TypeError: Object prototype may only be an Object or null: undefined
+    at Function.create (<anonymous>)
+    at proto.js:26
+*/
+
+
+
+/*
+proto.js:10 Person {}
+proto.js:13 This function is invoked
+proto.js:21 Person {firstname: "John", lastname: "Doe"}
+proto.js:10 Person {}
+proto.js:13 This function is invoked
+proto.js:24 Person {firstname: "Jane", lastname: "Doe"}
 */
 
 console.log(john.getFullName());
 
 //John Doe
+
+//From efficency standpoint is better to add methods to function constructors
+//through prototypes because not being present in the original function
+//means every 'new' object wont have to carry that method. If hundreds of objects
+// are made, the method is only linked saving memory.
+
+
+
+
+
+
