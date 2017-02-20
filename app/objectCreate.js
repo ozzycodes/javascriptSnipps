@@ -6,15 +6,33 @@ var person = {
 	}
 }
 
-var john = Object.create(person); //It creates an empty object just like 'new'
-john.firstname = 'John';          //But this works on OBJECT LITERALS
-john.lastname = 'Doe';
+var john = Object.create(person); //Just as 'new' is for function constructors, 
+john.firstname = 'John';          //Object.create works only on OBJECT LITERALS
+john.lastname = 'Doe';            //Adding properties or methods is easy with dot notation
+
 john.saymyname = function() {
-	return 'Say my name, say my name' + ' ' + 'My name is ' + this.firstname;
+	return 'Say your name, say your name' + ' ' + 'My name is ' + this.firstname + this.lastname;
+}
+
+person.voiceYourId = function() {
+	return 'Identification Plz' + ' ' + 'My name is ' + this.firstname + this.lastname;
 }
 
 console.log(john);
-console.log(john.saymyname());
+console.log(john.greet()); 			//this function is inside the person(), inside __proto
+console.log(john.saymyname());		//this function was added with the dot notation, not in __proto
+
+var jane = Object.create(person);
+jane.firstname = 'Jane';
+jane.lastname = 'Doe';
+
+
+console.log(jane);
+console.log(jane.greet()); 			//this function is inside the person(), inside __proto
+console.log(jane.voiceYourId());    //this is inside __proto__ too, it was made under person() but
+									//with dot notation
+
+
 
 
 //Object {firstname: "John", lastname: "Doe"}
