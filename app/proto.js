@@ -13,9 +13,19 @@ function Person(firstname, lastname) {
 	console.log('This function is invoked');   //no 'return' values
 }
 
-Person.prototype.getFullName = function() {
-	return this.firstname + ' ' + this.lastname; //Both john and jane will 
-}                                                //have access to this method
+Person.prototype = {
+	getFullName: function() {
+	return this.firstname + ' ' + this.lastname;
+	},
+	formalName: function() {
+		return 'Salutations: ' + this.lastname + ', ' + this.firstname;
+	} 
+}
+
+
+Person.prototype.coolName = function() {
+	return 'Hey, yo!' + this.firstname; //Both john and jane will 
+}
 
 var john = new Person('John', 'Doe'); //NEW ONLY WORKS IN FUNCTIONS, NOT OBJECT LITERALS
 console.log(john);                    //it runs the entire function
@@ -23,6 +33,11 @@ console.log(john);                    //it runs the entire function
 var jane = new Person('Jane', 'Doe');
 console.log(jane);                    //it runs the entire function
 
+console.log(john.getFullName());
+
+console.log(john.formalName());
+
+console.log(john.coolName());
 
 //Object.create can ONLY be used with OBJECT LITERALS
 
@@ -37,8 +52,6 @@ Uncaught TypeError: Object prototype may only be an Object or null: undefined
     at proto.js:26
 */
 
-
-
 /*
 proto.js:10 Person {}
 proto.js:13 This function is invoked
@@ -47,8 +60,6 @@ proto.js:10 Person {}
 proto.js:13 This function is invoked
 proto.js:24 Person {firstname: "Jane", lastname: "Doe"}
 */
-
-console.log(john.getFullName());
 
 //John Doe
 
